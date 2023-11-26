@@ -20,7 +20,10 @@ FYI I use Debian
 /** @ docs */
 
 /** @ dependencies */
+#include <ctime>
+#include <fstream>
 #include <filesystem>
+#include "args-parser.h"
 
 /** @ implementation */
 namespace TemplateGenerator
@@ -30,9 +33,22 @@ class BasicGenerator
 {
 public:
 	using path = std::filesystem::path;
-	int exec(const path& dst);
+	virtual void exec(const path& dst, const ArgsParser& args);
 
-private:
+protected:
+	std::string m_time;
+
+	virtual void setup(const path& dst, const ArgsParser& args);
+
+	virtual void line_exec(
+		const path& dst,
+		const ArgsParser& args,
+		std::string& line
+	) const;
+
+	static bool replace(std::string& str, const std::string from, const std::string to);
+	static std::string get_template(const path& dst, const ArgsParser& args);
+	static std::string get_time();
 
 };
 

@@ -50,9 +50,9 @@ void solve(ArgsParser& args)
 	/** @ exec */
 	string typ = dst.extension();
 	if (gen.find(typ) == gen.end())
-		bscgen.exec(dst);
+		bscgen.exec(dst, args);
 	else
-		gen[typ]->exec(dst);
+		gen[typ]->exec(dst, args);
 }
 
 int main(int argc, const char** argv)
