@@ -36,11 +36,11 @@ public:
 
 	explicit ArgsParser(int argc, const char** args);
 
-	bool has(char c) { return dct.find(c) != dct.end(); }
-	bool has_value(char c) { return has(c) && dct[c].length() > 0; }
+	bool has(char c) const { return dct.find(c) != dct.end(); }
+	bool has_value(char c) const { return has(c) && dct.at(c).length() > 0; }
 
-	str& get(char c) { return dct[c]; }
-	str& get(char c, str& s) { return has_value(c) ? get(c) : s; }
+	const str& get(char c) const { return dct.at(c); }
+	const str& get(char c, const str& s) const { return has_value(c) ? get(c) : s; }
 
 	const std::vector<std::string>& get_strays() const { return strays; }
 
