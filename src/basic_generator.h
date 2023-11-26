@@ -30,7 +30,7 @@ class BasicGenerator
 {
 public:
 	using path = std::filesystem::path;
-	static int exec(const path& dst);
+	int exec(const path& dst);
 
 private:
 

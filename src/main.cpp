@@ -35,18 +35,24 @@ void solve(ArgsParser& args)
 		dst += Param::DefaultFileType;
 
 	/** @ collect generators */
-	map<string, int (*)(const path&)> gen = {
-		{ ".cpp", CppGenerator::exec },
-		{ ".h",   CppGenerator::exec },
-		{ ".md",  MdGenerator::exec },
-		{ ".cs",  CsGenerator::exec },
+	CppGenerator cppgen;
+	MdGenerator mdgen;
+	CsGenerator csgen;
+	BasicGenerator bscgen;
+
+	map<string, BasicGenerator*> gen = {
+		{ ".cpp", &cppgen },
+		{ ".h",   &cppgen },
+		{ ".md",  &mdgen },
+		{ ".cs",  &csgen },
 	};
 
+	/** @ exec */
 	string typ = dst.extension();
 	if (gen.find(typ) == gen.end())
-		BasicGenerator::exec(dst);
+		bscgen.exec(dst);
 	else
-		gen[typ](dst);
+		gen[typ]->exec(dst);
 }
 
 int main(int argc, const char** argv)

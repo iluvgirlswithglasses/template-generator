@@ -20,17 +20,15 @@ FYI I use Debian
 /** @ docs */
 
 /** @ dependencies */
-#include <filesystem>
+#include "basic_generator.h"
 
 /** @ implementation */
 namespace TemplateGenerator
 {
 
-class CppGenerator
+class CppGenerator: public BasicGenerator
 {
 public:
-	using path = std::filesystem::path;
-	static int exec(const path& dst);
 
 private:
 
