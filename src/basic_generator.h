@@ -37,6 +37,8 @@ public:
 
 protected:
 	std::string m_time;
+	std::string m_filename;
+	std::string m_basename;
 
 	virtual void setup(const path& dst, const ArgsParser& args);
 

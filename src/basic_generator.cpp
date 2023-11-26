@@ -66,6 +66,8 @@ std::string BasicGenerator::get_time()
 void BasicGenerator::setup(const path& dst, const ArgsParser& args)
 {
 	m_time = get_time();
+	m_filename = dst.filename().string();
+	m_basename = dst.stem().string();
 }
 
 void BasicGenerator::exec(const path& dst, const ArgsParser& args)

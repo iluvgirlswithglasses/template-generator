@@ -30,7 +30,20 @@ class CppGenerator: public BasicGenerator
 {
 public:
 
+protected:
+	void setup(const path& dst, const ArgsParser& args) override;
+
+	void line_exec(
+		const path& dst,
+		const ArgsParser& args,
+		std::string& line
+	) override;
+
 private:
+	std::string
+		m_deff,		// file definition
+		m_nspc,		// namespace
+		m_clss;		// file class
 
 };
 

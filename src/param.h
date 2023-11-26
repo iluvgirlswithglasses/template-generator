@@ -35,6 +35,10 @@ public:
 	static const std::string& get_executable_directory();
 
 	/** @ C++ */
+	inline static const std::string
+		CppDefaultDEFF = "DEFF",
+		CppDefaultNSPC = "NSPC",
+		CppDefaultCLSS = "Class";
 
 	/** @ C# */
 
