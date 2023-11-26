@@ -30,7 +30,19 @@ class MdGenerator: public BasicGenerator
 {
 public:
 
+protected:
+	void setup(const path& dst, const ArgsParser& args) override;
+
+	void line_exec(
+		const path& dst,
+		const ArgsParser& args,
+		std::string& line
+	) override;
+
 private:
+	std::string m_mdtime;
+
+	static std::string get_mdtime();
 
 };
 

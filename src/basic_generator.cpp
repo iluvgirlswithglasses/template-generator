@@ -85,7 +85,7 @@ void BasicGenerator::line_exec(
 	const path& dst,
 	const ArgsParser& args,
 	std::string& line
-) const {
+) {
 	replace(line, "{{date}}", m_time);
 }
 

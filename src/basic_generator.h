@@ -44,7 +44,7 @@ protected:
 		const path& dst,
 		const ArgsParser& args,
 		std::string& line
-	) const;
+	);
 
 	static bool replace(std::string& str, const std::string from, const std::string to);
 	static std::string get_template(const path& dst, const ArgsParser& args);
