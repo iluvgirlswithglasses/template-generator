@@ -1,0 +1,50 @@
+cmake_minimum_required (VERSION 3.9)
+project(eupho CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_EXTENSIONS NO)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result OUTPUT output)
+if(result)
+	set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+else()
+	message(WARNING "IPO is not supported: ${output}")
+endif()
+
+include(CheckCXXCompilerFlag)
+include(AddCXXCompilerFlag)
+
+add_cxx_compiler_flag(-O3)
+add_cxx_compiler_flag(-march=native)
+add_cxx_compiler_flag(-mtune=native)
+add_cxx_compiler_flag(-Wall)
+add_cxx_compiler_flag(-Wthread-safety)
+add_cxx_compiler_flag(-Wshorten-64-to-32)
+add_cxx_compiler_flag(-Wno-deprecated)
+add_cxx_compiler_flag(-pedantic)
+add_cxx_compiler_flag(-pedantic-errors)
+add_cxx_compiler_flag(-fstrict-aliasing)
+add_cxx_compiler_flag(-fno-exceptions)
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+	find_program(GCC_AR gcc-ar)
+	if (GCC_AR)
+		set(CMAKE_AR ${GCC_AR})
+	endif()
+	find_program(GCC_RANLIB gcc-ranlib)
+	if (GCC_RANLIB)
+		set(CMAKE_RANLIB ${GCC_RANLIB})
+	endif()
+elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+	include(llvm-toolchain)
+endif()
+
+file(GLOB SOURCES src/*.cpp src/*.h)
+
+add_executable(g ${SOURCES})
+
