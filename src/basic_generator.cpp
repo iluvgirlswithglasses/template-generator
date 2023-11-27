@@ -16,8 +16,10 @@ FYI I use Debian
 
 #include "basic_generator.h"
 
+#include <iostream>
 #include <sstream>
 #include "param.h"
+#include "file_manager.h"
 
 namespace TemplateGenerator
 {
@@ -63,6 +65,20 @@ std::string BasicGenerator::get_time()
 /**
  * @ exec
  * */
+void BasicGenerator::help() const
+{
+	std::cout
+		<< "Usage: g <output-file> [variation]\n\n";
+	std::cout
+		<< "Generate <output-file> based on 't.filetype' in the template directory\n"
+		<< "Current template directory path: "
+		<< Param::get_executable_directory() << "/template/\n\n";
+	std::cout
+		<< "Variation:\n"
+		<< "    If [variation] is specified, template-generator will generate\n"
+		<< "    <output-file> based on 't.[variation].filetype'\n\n";
+}
+
 void BasicGenerator::setup(const path& dst, const ArgsParser& args)
 {
 	m_time = get_time();
@@ -72,9 +88,30 @@ void BasicGenerator::setup(const path& dst, const ArgsParser& args)
 
 void BasicGenerator::exec(const path& dst, const ArgsParser& args)
 {
+	/** @ check if help */
+	if (args.has('h')) {
+		help();
+		return;
+	}
+
+	/** @ ensure that the template file exists */
+	std::string template_path = get_template(dst, args);
+	if (!FileManager::file_exists(template_path)) {
+		std::clog
+			<< "ERROR: Template file for "
+			<< dst.filename() << " ("
+			<< path(template_path).filename().string() << ") "
+			<< "does not exist\n\n";
+		std::clog
+			<< "You can create that template yourself & save it as:\n"
+			<< "\"" << template_path << "\"\n\n";
+		return;
+	}
+
+	/** @ generate */
 	setup(dst, args);
 
-	std::ifstream fsrc(get_template(dst, args));
+	std::ifstream fsrc(template_path);
 	std::ofstream fdst(dst);
 	std::string line;
 	while (getline(fsrc, line)) {

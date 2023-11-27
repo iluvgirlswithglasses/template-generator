@@ -34,6 +34,7 @@ class BasicGenerator
 public:
 	using path = std::filesystem::path;
 	virtual void exec(const path& dst, const ArgsParser& args);
+	virtual void help() const;
 
 protected:
 	std::string m_time;
