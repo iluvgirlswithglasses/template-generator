@@ -34,12 +34,13 @@ class BasicGenerator
 public:
 	using path = std::filesystem::path;
 	virtual void exec(const path& dst, const ArgsParser& args);
-	virtual void help() const;
+	virtual void help();
 
 protected:
 	std::string m_time;
 	std::string m_filename;
 	std::string m_basename;
+	std::string m_filetype;
 
 	virtual void setup(const path& dst, const ArgsParser& args);
 

@@ -65,18 +65,28 @@ std::string BasicGenerator::get_time()
 /**
  * @ exec
  * */
-void BasicGenerator::help() const
+void BasicGenerator::help()
 {
 	std::cout
-		<< "Usage: g <output-file> [variation]\n\n";
+		<< "Usage: g <output-file>"
+		<< m_filetype
+		<< " [variation]\n\n";
+
 	std::cout
-		<< "Generate <output-file> based on 't.filetype' in the template directory\n"
+		<< "Generate a file based on 't"
+		<< m_filetype
+		<< "' in the template directory\n";
+	std::cout
 		<< "Current template directory path: "
 		<< Param::get_executable_directory() << "/template/\n\n";
+
 	std::cout
-		<< "Variation:\n"
+		<< "Variation:\n";
+	std::cout
 		<< "    If [variation] is specified, template-generator will generate\n"
-		<< "    <output-file> based on 't.[variation].filetype'\n\n";
+		<< "    the output file based on 't.[variation]"
+		<< m_filetype
+		<< "'\n\n";
 }
 
 void BasicGenerator::setup(const path& dst, const ArgsParser& args)
@@ -84,10 +94,13 @@ void BasicGenerator::setup(const path& dst, const ArgsParser& args)
 	m_time = get_time();
 	m_filename = dst.filename().string();
 	m_basename = dst.stem().string();
+	m_filetype = dst.extension().string();
 }
 
 void BasicGenerator::exec(const path& dst, const ArgsParser& args)
 {
+	setup(dst, args);
+
 	/** @ check if help */
 	if (args.has('h')) {
 		help();
@@ -109,8 +122,6 @@ void BasicGenerator::exec(const path& dst, const ArgsParser& args)
 	}
 
 	/** @ generate */
-	setup(dst, args);
-
 	std::ifstream fsrc(template_path);
 	std::ofstream fdst(dst);
 	std::string line;
@@ -128,6 +139,7 @@ void BasicGenerator::line_exec(
 	replace(line, "{{date}}", m_time);
 	replace(line, "{{filename}}", m_filename);
 	replace(line, "{{basename}}", m_basename);
+	replace(line, "{{filetype}}", m_filetype);
 }
 
 }
