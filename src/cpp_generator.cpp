@@ -17,8 +17,35 @@ FYI I use Debian
 #include "cpp_generator.h"
 #include "param.h"
 
+#include <iostream>
+
 namespace TemplateGenerator
 {
+
+void CppGenerator::help()
+{
+	std::cout
+		<< "Usage: g <output-file>.cpp [variation] [OPTIONS]\n\n";
+
+	std::cout
+		<< "Generate a file based on 't.cpp' in the template directory\n";
+	std::cout
+		<< "Current template directory path: "
+		<< Param::get_executable_directory() << "/template/\n\n";
+
+	std::cout
+		<< "Variation:\n";
+	std::cout
+		<< "    If [variation] is specified, template-generator will generate\n"
+		<< "    the output file based on 't.[variation].cpp'\n\n";
+
+	std::cout
+		<< "Options:\n";
+	std::cout
+		<< "    -d <definition>   The file's definition (replaces {{deff}})\n"
+		<< "    -n <namespace>    The file's namespace (replaces {{namespace}})\n"
+		<< "    -c <class>        The file's class (replaces {{class}})\n\n";
+}
 
 void CppGenerator::setup(const path& dst, const ArgsParser& args)
 {

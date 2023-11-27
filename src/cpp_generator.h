@@ -29,6 +29,7 @@ namespace TemplateGenerator
 class CppGenerator: public BasicGenerator
 {
 public:
+	void help() override;
 
 protected:
 	void setup(const path& dst, const ArgsParser& args) override;
