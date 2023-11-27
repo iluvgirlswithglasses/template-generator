@@ -31,8 +31,12 @@ void solve(ArgsParser& args)
 {
 	/** @ build target (destination) file information */
 	path dst(args.get_strays()[0]);
-	if (dst.extension() == "")
-		dst += Param::DefaultFileType;
+	if (dst.extension() == "") {
+		if (args.has('h'))
+			dst += dst.filename();	// cast .cpp to .cpp.cpp to get help
+		else
+			dst += Param::DefaultFileType;
+	}
 
 	/** @ collect generators */
 	CppGenerator cppgen;
@@ -43,6 +47,7 @@ void solve(ArgsParser& args)
 	map<string, BasicGenerator*> gen = {
 		{ ".cpp", &cppgen },
 		{ ".h",   &cppgen },
+		{ ".c",   &cppgen },
 		{ ".md",  &mdgen },
 		{ ".cs",  &csgen },
 	};

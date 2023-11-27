@@ -25,10 +25,14 @@ namespace TemplateGenerator
 void CppGenerator::help()
 {
 	std::cout
-		<< "Usage: g <output-file>.cpp [variation] [OPTIONS]\n\n";
+		<< "Usage: g <output-file>"
+		<< m_filetype
+		<< " [variation] [OPTIONS]\n\n";
 
 	std::cout
-		<< "Generate a file based on 't.cpp' in the template directory\n";
+		<< "Generate a file based on 't"
+		<< m_filetype
+		<< "' in the template directory\n";
 	std::cout
 		<< "Current template directory path: "
 		<< Param::get_executable_directory() << "/template/\n\n";
@@ -37,7 +41,9 @@ void CppGenerator::help()
 		<< "Variation:\n";
 	std::cout
 		<< "    If [variation] is specified, template-generator will generate\n"
-		<< "    the output file based on 't.[variation].cpp'\n\n";
+		<< "    the output file based on 't.[variation]"
+		<< m_filetype
+		<< "'\n\n";
 
 	std::cout
 		<< "Options:\n";
