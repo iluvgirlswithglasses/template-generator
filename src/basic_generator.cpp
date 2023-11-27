@@ -89,6 +89,8 @@ void BasicGenerator::line_exec(
 	std::string& line
 ) {
 	replace(line, "{{date}}", m_time);
+	replace(line, "{{filename}}", m_filename);
+	replace(line, "{{basename}}", m_basename);
 }
 
 }
