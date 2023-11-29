@@ -18,6 +18,7 @@ FYI I use Debian
 
 #include <iostream>
 #include <cstring>
+#include <filesystem>
 #include <unistd.h>
 
 namespace TemplateGenerator
@@ -28,9 +29,8 @@ Param::ExecutableDirectory::ExecutableDirectory()
 		char ans[MaxPathLength];
 		if (readlink("/proc/self/exe", ans, sizeof(ans)) == -1)
 			return "";	// not on linux --> this feature is unsupported
-		char* last_slash = strrchr(ans, '/');
-		*last_slash = '\0';
-		return ans;
+		using path = std::filesystem::path;
+		return path(ans).parent_path().string();
 	}())
 {
 }
