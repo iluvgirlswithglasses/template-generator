@@ -55,8 +55,20 @@ void CppGenerator::help()
 
 void CppGenerator::setup(const path& dst, const ArgsParser& args)
 {
+	const auto deff = [](const std::string& fname) {
+		std::string ans;
+		for (char c: fname) {
+			if ('a' <= c && c <= 'z')
+				c = c - 'a' + 'A';
+			else if (c == '-' || c == ' ' || c == '.')
+				c = '_';
+			ans += c;
+		}
+		return ans;
+	};
+
 	BasicGenerator::setup(dst, args);
-	m_deff = args.get('d', Param::CppDefaultDEFF);
+	m_deff = args.get('d', deff(m_filename));
 	m_nspc = args.get('n', Param::CppDefaultNSPC);
 	m_clss = args.get('c', Param::CppDefaultCLSS);
 }
