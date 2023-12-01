@@ -35,7 +35,7 @@ void CppGenerator::help()
 		<< "' in the template directory\n";
 	std::cout
 		<< "Current template directory path: "
-		<< Param::get_executable_directory() << "/template/\n\n";
+		<< Param::TemplateDirectory << "\n\n";
 
 	std::cout
 		<< "Variation:\n";

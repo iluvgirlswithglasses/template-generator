@@ -30,25 +30,18 @@ struct Param
 {
 public:
 	static constexpr char
-		DefaultFileType[] = ".cpp";
-
-	static const std::string& get_executable_directory();
+		DefaultFileType[] = ".cpp",
+		TemplateDirectory[] = "/home/mika/exc/template/";
 
 	/** @ C++ */
 	inline static const std::string
-		CppDefaultDEFF = "DEFF",
 		CppDefaultNSPC = "NSPC",
 		CppDefaultCLSS = "Class";
 
 	/** @ C# */
 
 private:
-	struct ExecutableDirectory
-	{
-		static constexpr size_t MaxPathLength = 1024;
-		const std::string dir;
-		ExecutableDirectory();
-	};
+
 };
 
 }	// namespace TemplateGenerator

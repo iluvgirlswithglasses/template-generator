@@ -46,8 +46,8 @@ std::string BasicGenerator::get_template(const path& dst, const ArgsParser& args
 	}
 
 	std::stringstream ans;
-	ans << Param::get_executable_directory()
-		<< "/template/t"
+	ans << Param::TemplateDirectory
+		<< "t"
 		<< opt
 		<< dst.extension().string();
 
@@ -78,7 +78,7 @@ void BasicGenerator::help()
 		<< "' in the template directory\n";
 	std::cout
 		<< "Current template directory path: "
-		<< Param::get_executable_directory() << "/template/\n\n";
+		<< Param::TemplateDirectory << "\n\n";
 
 	std::cout
 		<< "Variation:\n";
