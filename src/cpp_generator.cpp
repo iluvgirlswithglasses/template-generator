@@ -18,6 +18,7 @@ FYI I use Debian
 #include "param.h"
 
 #include <iostream>
+#include <vector>
 
 namespace TemplateGenerator
 {
@@ -53,24 +54,41 @@ void CppGenerator::help()
 		<< "    -c <class>        The file's class (replaces {{class}})\n\n";
 }
 
+std::string CppGenerator::get_definition(const std::string& filename)
+{
+	std::string ans;
+	for (char c: filename) {
+		if ('a' <= c && c <= 'z')
+			c = c - 'a' + 'A';
+		else if (is_seperator(c))
+			c = '_';
+		ans += c;
+	}
+	return ans;
+}
+
+std::string CppGenerator::get_classname(const std::string& basename)
+{
+	std::string ans;
+	size_t len = basename.length(), lst = 0;
+	for (int i = 0; i <= len; i++) if (i == len || is_seperator(basename[i])) {
+		if (i - lst > 0) {
+			size_t cap = ans.length();
+			ans += basename.substr(lst, i - lst);
+			if ('a' <= ans[cap] && ans[cap] <= 'z')
+				ans[cap] = ans[cap] - 'a' + 'A';
+		}
+		lst = i + 1;
+	}
+	return ans;
+}
+
 void CppGenerator::setup(const path& dst, const ArgsParser& args)
 {
-	const auto deff = [](const std::string& fname) {
-		std::string ans;
-		for (char c: fname) {
-			if ('a' <= c && c <= 'z')
-				c = c - 'a' + 'A';
-			else if (c == '-' || c == ' ' || c == '.')
-				c = '_';
-			ans += c;
-		}
-		return ans;
-	};
-
 	BasicGenerator::setup(dst, args);
-	m_deff = args.get('d', deff(m_filename));
+	m_deff = args.get('d', get_definition(m_filename));
 	m_nspc = args.get('n', Param::CppDefaultNSPC);
-	m_clss = args.get('c', Param::CppDefaultCLSS);
+	m_clss = args.get('c', get_classname(m_basename));
 }
 
 void CppGenerator::line_exec(

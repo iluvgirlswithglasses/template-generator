@@ -40,6 +40,10 @@ protected:
 		std::string& line
 	) override;
 
+	std::string get_definition(const std::string& filename);
+	std::string get_classname(const std::string& basename);
+	bool is_seperator(char c) { return c == ' ' || c == '.' || c == '-' || c == '_'; }
+
 private:
 	std::string
 		m_deff,		// file definition

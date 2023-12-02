@@ -35,8 +35,7 @@ public:
 
 	/** @ C++ */
 	inline static const std::string
-		CppDefaultNSPC = "NSPC",
-		CppDefaultCLSS = "Class";
+		CppDefaultNSPC = "NSPC";
 
 	/** @ C# */
 
