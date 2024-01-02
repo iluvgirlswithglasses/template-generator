@@ -17,6 +17,7 @@ FYI I use Debian
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
+#include <cstdint>
 #include <algorithm>
 #include <cmath>
 #include <string>
@@ -240,7 +241,6 @@ static struct FastOutput
 
 #define cout fast_output
 
-typedef long long ll;
 typedef pair<int, int> pi;
 #define st first
 #define nd second

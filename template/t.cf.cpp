@@ -17,6 +17,7 @@ FYI I use Debian
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
+#include <cstdint>
 #include <algorithm>
 #include <cmath>
 #include <string>
@@ -29,7 +30,6 @@ FYI I use Debian
 #include <unordered_map>
 using namespace std;
 
-typedef long long ll;
 typedef pair<int, int> pi;
 #define st first
 #define nd second

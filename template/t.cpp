@@ -15,9 +15,9 @@ FYI I use Debian
 */
 
 #include <iostream>
+#include <cstdint>
 using namespace std;
 
-typedef long long ll;
 typedef pair<int, int> pi;
 #define st first
 #define nd second

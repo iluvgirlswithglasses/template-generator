@@ -15,6 +15,7 @@ FYI I use Debian
 */
 
 #include <iostream>
+#include <cstdint>
 using namespace std;
 
 // some words from fallingstar:
@@ -228,7 +229,6 @@ static struct FastOutput
 
 #define cout fast_output
 
-typedef long long ll;
 typedef pair<int, int> pi;
 #define st first
 #define nd second
