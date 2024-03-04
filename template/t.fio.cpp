@@ -1,16 +1,17 @@
 
 /*
-author: 	iluvgirlswithglasses
-github: 	https://github.com/iluvgirlswithglasses
+author:		iluvgirlswithglasses
+github:		https://github.com/iluvgirlswithglasses
 created:	{{date}}
-style:  	C-Kernel with custom pointer rule
+style:		C-Kernel with custom pointer rule
 tab-width:	4 spaces
 
  /\_/\
 ( o.o )
  > ^ <
 
-I firmly believe in the supremacy of the Euphonium
+See more about the style at:
+	https://iluvgirlswithglasses.github.io/style/cpp
 FYI I use Debian
 */
 
