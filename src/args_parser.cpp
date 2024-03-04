@@ -14,7 +14,7 @@ I firmly believe in the supremacy of the Euphonium
 FYI I use Debian
 */
 
-#include "args-parser.h"
+#include "args_parser.h"
 #include <iostream>
 
 namespace TemplateGenerator

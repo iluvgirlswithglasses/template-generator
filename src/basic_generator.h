@@ -23,7 +23,7 @@ FYI I use Debian
 #include <ctime>
 #include <fstream>
 #include <filesystem>
-#include "args-parser.h"
+#include "args_parser.h"
 
 /** @ implementation */
 namespace TemplateGenerator
